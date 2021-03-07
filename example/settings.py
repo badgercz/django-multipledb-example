@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'guardian',
     'polls.apps.PollsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -124,10 +125,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-
-DATABASES_APPS_MAPPING = {
-    'polls': 'example'
-}
-
+# cesta k routeru kterej rozhoduje co kam posilat
 DATABASE_ROUTERS = ['database_app_router.DatabaseAppsRouter']
 
+
+# guardian
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend', # this is default
+    'guardian.backends.ObjectPermissionBackend',
+)
